@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project_par_fans/loginController.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
+class Login extends GetView<Logincontroller> {
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +17,9 @@ class _LoginState extends State<Login> {
             ),
             SizedBox(
               width: 300,
-              child: TextField(
+              child: TextFormField(
                 decoration: InputDecoration(
+                  icon: Icon(Icons.mail),
                     border: OutlineInputBorder(), labelText: 'Username'),
               ),
             ),
@@ -36,14 +28,16 @@ class _LoginState extends State<Login> {
             ),
             SizedBox(
               width: 300,
-              child: TextField(
+              child: TextFormField(
                 decoration: InputDecoration(
+                  icon: Icon(Icons.key),
                     border: OutlineInputBorder(), labelText: 'Password'),
               ),
             ),
             SizedBox(
               height: 10,
             ),
+            )
           ],
         ),
       ),
