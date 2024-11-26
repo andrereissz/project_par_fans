@@ -7,6 +7,8 @@ environment:
   sdk: ^3.5.2
 
 dependencies:
+  cloud_firestore: ^5.5.0
+  firebase_core: ^3.8.0
   flutter:
     sdk: flutter
   get: ^4.6.6
@@ -15,15 +17,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: 
-  firebase_core: 
   firebase_auth: 
   firebase_database: 
   firebase_storage: 
-  cloud_firestore: 
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/parfans_logo.png
-    - assets/parfans_logo.jpg
+    - assets/logo.png
 
