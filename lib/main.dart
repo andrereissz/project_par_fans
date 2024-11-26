@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 import 'package:project_par_fans/telas/home.dart';
 import 'package:project_par_fans/telas/login.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+void main() async{
+
   runApp(GetMaterialApp(
     initialRoute: '/',
     getPages: [

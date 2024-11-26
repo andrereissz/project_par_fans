@@ -13,14 +13,22 @@ class Login extends GetView<Logincontroller> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 30,
+              height: 100,
+              child: Image.asset('assets/logo.png', fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                return Text('Image not found');
+              }),
+            ),
+            SizedBox(
+              height: 10,
             ),
             SizedBox(
               width: 300,
               child: TextFormField(
                 decoration: InputDecoration(
-                  icon: Icon(Icons.mail),
-                    border: OutlineInputBorder(), labelText: 'Username'),
+                    icon: Icon(Icons.mail),
+                    border: OutlineInputBorder(),
+                    labelText: 'Username'),
               ),
             ),
             SizedBox(
@@ -30,14 +38,14 @@ class Login extends GetView<Logincontroller> {
               width: 300,
               child: TextFormField(
                 decoration: InputDecoration(
-                  icon: Icon(Icons.key),
-                    border: OutlineInputBorder(), labelText: 'Password'),
+                    icon: Icon(Icons.key),
+                    border: OutlineInputBorder(),
+                    labelText: 'Password'),
               ),
             ),
             SizedBox(
               height: 10,
             ),
-            )
           ],
         ),
       ),
