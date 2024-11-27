@@ -1,6 +1,7 @@
 class Usuario {
   String? username;
-  String? password;
+  String? email;
+  int? id;
 
-  Usuario(this.username, this.password);
+  Usuario(this.username, this.password, this.id);
 }

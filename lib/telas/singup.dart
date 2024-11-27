@@ -1,43 +1,30 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/widgets.dart';
 import 'package:project_par_fans/services/authentication.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Singup extends StatefulWidget {
+  const Singup({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Singup> createState() => _SingupState();
 }
 
-class _LoginState extends State<Login> {
+class _SingupState extends State<Singup> {
+  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    User? user;
-    user = FirebaseAuth.instance.currentUser;
-    if (user != null) Get.toNamed('/home');
-    // TODO: implement build
     return Theme(
       data: ThemeData(
           colorScheme: ThemeData().colorScheme.copyWith(primary: Colors.black)),
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          toolbarHeight: 50,
+        ),
         backgroundColor: Colors.white,
         body: Center(
           child: Column(
@@ -49,6 +36,19 @@ class _LoginState extends State<Login> {
                     errorBuilder: (context, error, stackTrace) {
                   return Text('Image not found');
                 }),
+              ),
+              SizedBox(
+                width: 300,
+                child: TextFormField(
+                  controller: usernameController,
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
+                      labelText: 'Username'),
+                ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               SizedBox(
                 width: 300,
@@ -80,21 +80,9 @@ class _LoginState extends State<Login> {
                 width: 200,
                 child: TextButton(
                     onPressed: () async {
-                      await Authentication().singin(
+                      await Authentication().singup(
                         email: emailController.text,
                         password: passwordController.text,
-                      );
-                    },
-                    child: Text(
-                      "Login",
-                    )),
-              ),
-              SizedBox(
-                width: 200,
-                child: TextButton(
-                    onPressed: () {
-                      Get.toNamed(
-                        '/singup',
                       );
                     },
                     child: Text(
