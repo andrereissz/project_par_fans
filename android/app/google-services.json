@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "978701716541",
+    "project_id": "par-fans",
+    "storage_bucket": "par-fans.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978701716541:android:d6a9c9a2abbfb2b5156e54",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV5RW4Wqc_UZ9dT0sC7PwIWwZp0EjgOCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978701716541:android:a93ea09675e1fef7156e54",
+        "android_client_info": {
+          "package_name": "com.example.project_par_fans"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV5RW4Wqc_UZ9dT0sC7PwIWwZp0EjgOCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
