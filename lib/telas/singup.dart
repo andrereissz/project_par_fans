@@ -7,6 +7,7 @@ class Singup extends StatefulWidget {
   const Singup({super.key});
 
   @override
+  @override
   State<Singup> createState() => _SingupState();
 }
 
@@ -45,6 +46,7 @@ class _SingupState extends State<Singup> {
                       icon: Icon(Icons.person),
                       border: OutlineInputBorder(),
                       labelText: 'Username'),
+                  focusNode: FocusNode(),
                 ),
               ),
               SizedBox(
@@ -80,7 +82,8 @@ class _SingupState extends State<Singup> {
                 width: 200,
                 child: TextButton(
                     onPressed: () async {
-                      await Authentication().singup(
+                      await Authentication().singUp(
+                        username: usernameController.text,
                         email: emailController.text,
                         password: passwordController.text,
                       );

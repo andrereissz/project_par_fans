@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_par_fans/services/authentication.dart';
 import 'package:project_par_fans/services/database.dart';
 
 class Home extends StatefulWidget {
@@ -13,6 +14,22 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              child: TextButton(
+                  onPressed: () async {
+                    await Authentication().signOut();
+                  },
+                  child: Text('Logout')),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

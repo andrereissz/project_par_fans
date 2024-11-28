@@ -30,9 +30,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    User? user;
-    user = FirebaseAuth.instance.currentUser;
-    if (user != null) Get.toNamed('/home');
     // TODO: implement build
     return Theme(
       data: ThemeData(
@@ -80,7 +77,7 @@ class _LoginState extends State<Login> {
                 width: 200,
                 child: TextButton(
                     onPressed: () async {
-                      await Authentication().singin(
+                      await Authentication().singIn(
                         email: emailController.text,
                         password: passwordController.text,
                       );

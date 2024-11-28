@@ -14,6 +14,8 @@ dependencies:
     sdk: flutter
   fluttertoast: ^8.2.8
   get: ^4.6.6
+  get_storage: ^2.1.1
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:

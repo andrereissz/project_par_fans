@@ -1,16 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:project_par_fans/telas/home.dart';
+import 'package:uuid/uuid.dart';
 
 class Authentication {
-  Future<void> singup({required String email, required String password}) async {
+  Future<void> singUp({
+    required String username,
+    required String email,
+    required String password,
+  }) async {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
+      CollectionReference usersRef =
+          FirebaseFirestore.instance.collection('users');
+      usersRef.add({
+        'username': username,
+        'email': email,
+        'id': Uuid().v4(),
+      });
       await Future.delayed(const Duration(seconds: 1));
-      Get.toNamed('/home');
+      Get.offAllNamed('/home');
     } on FirebaseAuthException catch (e) {
       String message = '';
       if (e.code == 'weak-password') {
@@ -27,12 +40,12 @@ class Authentication {
     }
   }
 
-  Future<void> singin({required String email, required String password}) async {
+  Future<void> singIn({required String email, required String password}) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      Get.toNamed('/home');
+      Get.offAllNamed('/home');
     } on FirebaseAuthException catch (e) {
       String message = '';
       if (e.code == 'invalid-email') {
@@ -47,5 +60,10 @@ class Authentication {
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.TOP);
     }
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    Get.offAllNamed('/login');
   }
 }

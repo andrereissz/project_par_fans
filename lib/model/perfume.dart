@@ -5,6 +5,7 @@ class Perfume {
   int notaEstacao;
   int notaGeral;
   int notaOcasiao;
+  int reviewerId;
 
   Perfume({
     required this.nome,
@@ -13,6 +14,7 @@ class Perfume {
     required this.notaEstacao,
     required this.notaGeral,
     required this.notaOcasiao,
+    required this.reviewerId,
   });
 
   Perfume.fromJson(Map<String, Object?> json)
@@ -23,6 +25,7 @@ class Perfume {
           notaEstacao: json['notaEstacao']! as int,
           notaGeral: json['notaGeral']! as int,
           notaOcasiao: json['notaOcasiao']! as int,
+          reviewerId: json['reviewerId']! as int,
         );
 
   Perfume copyWith({
@@ -32,6 +35,7 @@ class Perfume {
     int? notaEstacao,
     int? notaGeral,
     int? notaOcasiao,
+    int? reviewerId,
   }) {
     return Perfume(
         nome: nome ?? this.nome,
@@ -39,7 +43,8 @@ class Perfume {
         notaCompartilhavel: notaCompartilhavel ?? this.notaCompartilhavel,
         notaEstacao: notaEstacao ?? this.notaEstacao,
         notaGeral: notaGeral ?? this.notaGeral,
-        notaOcasiao: notaOcasiao ?? this.notaOcasiao);
+        notaOcasiao: notaOcasiao ?? this.notaOcasiao,
+        reviewerId: reviewerId ?? this.reviewerId);
   }
 
   Map<String, Object?> toJson() {
@@ -50,6 +55,7 @@ class Perfume {
       'notaEstacao': notaEstacao,
       'notaGeral': notaGeral,
       'notaOcasiao': notaOcasiao,
+      'reviewerId': reviewerId,
     };
   }
 }
