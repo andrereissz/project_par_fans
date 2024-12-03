@@ -1,35 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_par_fans/login_controller.dart';
 import 'package:project_par_fans/services/authentication.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
+class Login extends GetView<LoginController> {
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
+
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     // TODO: implement build
     return Theme(
       data: ThemeData(

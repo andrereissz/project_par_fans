@@ -12,6 +12,7 @@ dependencies:
   firebase_core: ^3.8.0
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.4.3
   fluttertoast: ^8.2.8
   get: ^4.6.6
   get_storage: ^2.1.1
@@ -29,3 +30,9 @@ flutter:
   assets:
     - assets/logo.png
 
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/logo.png

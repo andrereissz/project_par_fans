@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_par_fans/bottomNav.dart';
 import 'package:project_par_fans/services/authentication.dart';
 import 'package:project_par_fans/services/database.dart';
 
@@ -14,21 +15,13 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              child: TextButton(
-                  onPressed: () async {
-                    await Authentication().signOut();
-                  },
-                  child: Text('Logout')),
-            )
-          ],
-        ),
+    return Theme(
+      data: ThemeData(
+          colorScheme: ThemeData().colorScheme.copyWith(primary: Colors.black)),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(),
+        bottomNavigationBar: Bottomnav.getBarraNav(0),
       ),
     );
   }

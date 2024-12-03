@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_par_fans/model/user.dart';
 import 'package:project_par_fans/telas/home.dart';
 import 'package:project_par_fans/telas/login.dart';
 import 'package:project_par_fans/telas/singup.dart';
-import 'package:project_par_fans/telas/splash.dart';
+import 'package:project_par_fans/telas/userProfile.dart';
 import 'firebase_options.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -17,12 +18,15 @@ void main() async {
   runApp(GetMaterialApp(
     initialRoute: '/',
     getPages: [
-      GetPage(name: '/', page: () => Splash()),
-      GetPage(name: '/home', page: () => Home()),
-      GetPage(name: '/login', page: () => Login()),
+      GetPage(name: '/', page: () => Login()),
+      GetPage(name: '/home', page: () => Home(), transition: Transition.native),
+      GetPage(
+          name: '/user',
+          page: () => UserProfile(),
+          transition: Transition.native),
       GetPage(
           name: '/singup', page: () => Singup(), transition: Transition.fade)
     ],
-    home: Splash(),
+    home: Login(),
   ));
 }
