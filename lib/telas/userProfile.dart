@@ -1,21 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/bottomNav.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserProfile extends GetView {
-  const UserProfile({super.key});
+  final userId = ''; // Passando apenas o uID do usuário
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-          colorScheme: ThemeData().colorScheme.copyWith(primary: Colors.black)),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(),
-        bottomNavigationBar: Bottomnav.getBarraNav(1),
-      ),
+    // TODO: implement build
+    return Scaffold(
+      
     );
   }
 }

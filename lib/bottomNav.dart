@@ -8,17 +8,17 @@ class Bottomnav {
       currentIndex: currIndex,
       onTap: (int newIndex) {
         switch (newIndex) {
-          case (0):
+          case (1):
             Get.toNamed('/home');
             break;
-          case (1):
+          case (2):
             Get.toNamed('/user');
             break;
         }
       },
       items: [
         BottomNavigationBarItem(
-            label: "Fragrances", icon: Icon(Icons.air_outlined)),
+            label: "Reviews", icon: Icon(Icons.air_outlined)),
         BottomNavigationBarItem(label: "User", icon: Icon(Icons.person))
       ],
     );

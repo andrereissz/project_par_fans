@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project_par_fans/model/perfume.dart';
+import 'package:project_par_fans/model/perfumeReview.dart';
 import 'package:project_par_fans/model/user.dart';
 
-const String PERFUMES_COLLECTION_REF = "perfumes";
+const String REVIEWS_COLLECTION_REF = "reviews";
 const String USERS_COLLECTION_REF = "users";
 
 class Database {
@@ -13,8 +13,8 @@ class Database {
 
   DatabaseService() {
     _perfumesRef =
-        _firestore.collection(PERFUMES_COLLECTION_REF).withConverter<Perfume>(
-            fromFirestore: (snapshot, _) => Perfume.fromJson(
+        _firestore.collection(REVIEWS_COLLECTION_REF).withConverter<PerfumeReview>(
+            fromFirestore: (snapshot, _) => PerfumeReview.fromJson(
                   snapshot.data()!,
                 ),
             toFirestore: (perfume, _) => perfume.toJson());
@@ -29,7 +29,7 @@ class Database {
     return _perfumesRef.snapshots();
   }
 
-  void addPerfume(Perfume perfume) async {
+  void addPerfume(PerfumeReview perfume) async {
     _perfumesRef.add(perfume);
   }
 

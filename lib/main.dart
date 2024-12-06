@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/model/user.dart';
 import 'package:project_par_fans/telas/home.dart';
 import 'package:project_par_fans/telas/login.dart';
+import 'package:project_par_fans/telas/review.dart';
 import 'package:project_par_fans/telas/singup.dart';
 import 'package:project_par_fans/telas/userProfile.dart';
+import 'package:project_par_fans/theme.dart';
 import 'firebase_options.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -15,18 +16,26 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(GetMaterialApp(
-    initialRoute: '/',
-    getPages: [
-      GetPage(name: '/', page: () => Login()),
-      GetPage(name: '/home', page: () => Home(), transition: Transition.native),
-      GetPage(
-          name: '/user',
-          page: () => UserProfile(),
-          transition: Transition.native),
-      GetPage(
-          name: '/singup', page: () => Singup(), transition: Transition.fade)
-    ],
-    home: Login(),
-  ));
+  runApp(
+    GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => Login()),
+        GetPage(
+            name: '/create-review', page: () => CreatePerfumeReviewScreen()),
+        GetPage(
+            name: '/home',
+            page: () => Home(),
+            transition: Transition.noTransition),
+        GetPage(
+            name: '/user',
+            page: () => UserProfile(),
+            transition: Transition.noTransition),
+        GetPage(
+            name: '/singup', page: () => Singup(), transition: Transition.fade)
+      ],
+      home: Login(),
+      theme: AppTheme.theme,
+    ),
+  );
 }
