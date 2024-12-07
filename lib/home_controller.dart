@@ -17,6 +17,7 @@ class HomeController extends GetxController {
     fetchReviews();
   }
 
+
   Future<void> refreshReviews() async {
     isLoading.value = true;
     fetchReviews();

@@ -7,13 +7,16 @@ import 'package:fluttertoast/fluttertoast.dart';
 class CreatePerfumeReviewController extends GetxController {
   final nameController = TextEditingController();
   final brandController = TextEditingController();
+  final commentController = TextEditingController();
 
   var reviewerId = ''.obs;
   var reviewerUsername = ''.obs;
-  var selectedCompartilhavel = "Unissex".obs;
-  var selectedEstacao = "spring".obs;
-  var selectedOcasiao = "day".obs;
-  var notaGeral = 3.0.obs;
+  var selectedGenre = "Unisex".obs;
+  var selectedSeason = "Spring".obs;
+  var selectedOccasion = "Day".obs;
+  var selectedLongevity = "Moderate".obs;
+  var selectedSillage = "Moderate".obs;
+  var overallRating = 3.0.obs;
 
   @override
   void onInit() {
@@ -35,13 +38,13 @@ class CreatePerfumeReviewController extends GetxController {
         if (userSnapshot.docs.isNotEmpty) {
           reviewerId.value = userSnapshot.docs.first.id;
           reviewerUsername.value =
-              userSnapshot.docs.first['username'] ?? 'Anônimo';
+              userSnapshot.docs.first['username'] ?? 'Anonymous';
         } else {
-          _showToast("Usuário não encontrado no Firestore.", Colors.red);
+          _showToast("User not found in Firestore.", Colors.red);
         }
       }
     } catch (e) {
-      _showToast("Erro ao buscar usuário: $e", Colors.red);
+      _showToast("Error fetching user: $e", Colors.red);
     }
   }
 
@@ -49,8 +52,7 @@ class CreatePerfumeReviewController extends GetxController {
     if (nameController.text.isEmpty ||
         brandController.text.isEmpty ||
         reviewerId.isEmpty) {
-      _showToast(
-          "Preencha todos os campos e aguarde o carregamento do usuário.",
+      _showToast("Please fill in all fields and wait for the user to load.",
           Colors.red);
       return;
     }
@@ -61,16 +63,21 @@ class CreatePerfumeReviewController extends GetxController {
         'brand': brandController.text,
         'reviewerId': reviewerId.value,
         'reviewerUsername': reviewerUsername.value,
-        'notaCompartilhavel': selectedCompartilhavel.value,
-        'notaEstacao': selectedEstacao.value,
-        'notaOcasiao': selectedOcasiao.value,
-        'notaGeral': notaGeral.value.toInt(),
+        'genre': selectedGenre.value,
+        'season': selectedSeason.value,
+        'occasion': selectedOccasion.value,
+        'longevity': selectedLongevity.value,
+        'sillage': selectedSillage.value,
+        'overallRating': overallRating.value.toInt(),
+        'reviewDate': FieldValue.serverTimestamp(),
+        'comment':
+            commentController.text.isEmpty ? null : commentController.text,
       });
 
-      _showToast("Review criado com sucesso!", Colors.green);
-      Get.back();
+      _showToast("Review successfully created!", Colors.green);
+      Get.toNamed('/home');
     } catch (e) {
-      _showToast("Erro ao salvar review: $e", Colors.red);
+      _showToast("Error saving review: $e", Colors.red);
     }
   }
 
@@ -78,7 +85,7 @@ class CreatePerfumeReviewController extends GetxController {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
+      gravity: ToastGravity.TOP,
       backgroundColor: color,
       textColor: Colors.white,
       fontSize: 16.0,

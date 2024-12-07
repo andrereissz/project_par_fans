@@ -1,22 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PerfumeReview {
   String name;
   String brand;
   String reviewerId;
   String reviewerUsername;
-  String notaCompartilhavel;
-  String notaEstacao;
-  int notaGeral;
-  String notaOcasiao;
+  String genre;
+  String season;
+  int overallRating;
+  String occasion;
+  Timestamp reviewDate;
+  String longevity;
+  String sillage;
+  String comment;
 
   PerfumeReview({
     required this.name,
     required this.brand,
-    required this.notaCompartilhavel,
-    required this.notaEstacao,
-    required this.notaGeral,
-    required this.notaOcasiao,
+    required this.genre,
+    required this.season,
+    required this.overallRating,
+    required this.occasion,
     required this.reviewerId,
     required this.reviewerUsername,
+    required this.reviewDate,
+    required this.longevity,
+    required this.sillage,
+    required this.comment,
   });
 
   PerfumeReview.fromJson(Map<String, Object?> json)
@@ -25,10 +35,14 @@ class PerfumeReview {
           brand: json['brand']! as String,
           reviewerId: json['reviewerId']! as String,
           reviewerUsername: json['reviewerUsername']! as String,
-          notaCompartilhavel: json['notaCompartilhavel']! as String,
-          notaEstacao: json['notaEstacao']! as String,
-          notaGeral: json['notaGeral']! as int,
-          notaOcasiao: json['notaOcasiao']! as String,
+          genre: json['genre']! as String,
+          season: json['season']! as String,
+          overallRating: json['overallRating']! as int,
+          occasion: json['occasion']! as String,
+          reviewDate: json['reviewDate']! as Timestamp,
+          longevity: json['longevity']! as String,
+          sillage: json['sillage']! as String,
+          comment: json['comment']! as String,
         );
 
   PerfumeReview copyWith({
@@ -36,20 +50,28 @@ class PerfumeReview {
     String? brand,
     String? reviewerId,
     String? reviewerUsername,
-    String? notaCompartilhavel,
-    String? notaEstacao,
-    int? notaGeral,
-    String? notaOcasiao,
+    String? genre,
+    String? season,
+    int? overallRating,
+    String? occasion,
+    Timestamp? reviewDate,
+    String? longevity,
+    String? sillage,
+    String? comment,
   }) {
     return PerfumeReview(
       name: name ?? this.name,
       brand: brand ?? this.brand,
       reviewerId: reviewerId ?? this.reviewerId,
       reviewerUsername: reviewerUsername ?? this.reviewerUsername,
-      notaCompartilhavel: notaCompartilhavel ?? this.notaCompartilhavel,
-      notaEstacao: notaEstacao ?? this.notaEstacao,
-      notaGeral: notaGeral ?? this.notaGeral,
-      notaOcasiao: notaOcasiao ?? this.notaOcasiao,
+      genre: genre ?? this.genre,
+      season: season ?? this.season,
+      overallRating: overallRating ?? this.overallRating,
+      occasion: occasion ?? this.occasion,
+      reviewDate: reviewDate ?? this.reviewDate,
+      longevity: longevity ?? this.longevity,
+      sillage: sillage ?? this.sillage,
+      comment: comment ?? this.comment,
     );
   }
 
@@ -59,10 +81,14 @@ class PerfumeReview {
       'brand': brand,
       'reviewerId': reviewerId,
       'reviewerUsername': reviewerUsername,
-      'notaCompartilhavel': notaCompartilhavel,
-      'notaEstacao': notaEstacao,
-      'notaGeral': notaGeral,
-      'notaOcasiao': notaOcasiao,
+      'genre': genre,
+      'season': season,
+      'overallRating': overallRating,
+      'occasion': occasion,
+      'reviewDate': reviewDate,
+      'longevity': longevity,
+      'sillage': sillage,
+      'comment': comment,
     };
   }
 
@@ -72,10 +98,14 @@ class PerfumeReview {
       brand: data['brand'] ?? '',
       reviewerId: data['reviewerId'] ?? '',
       reviewerUsername: data['reviewerUsername'] ?? '',
-      notaCompartilhavel: data['notaCompartilhavel'] ?? '',
-      notaEstacao: data['notaEstacao'] ?? '',
-      notaGeral: data['notaGeral'] ?? 0,
-      notaOcasiao: data['notaOcasiao'] ?? '',
+      genre: data['genre'] ?? '',
+      season: data['season'] ?? '',
+      overallRating: data['overallRating'] ?? 0,
+      occasion: data['occasion'] ?? '',
+      reviewDate: data['reviewDate'] ?? Timestamp.now(),
+      longevity: data['longevity'] ?? '',
+      sillage: data['sillage'] ?? '',
+      comment: data['comment'] ?? '',
     );
   }
 }

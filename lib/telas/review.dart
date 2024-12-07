@@ -36,22 +36,21 @@ class CreatePerfumeReviewScreen extends GetView<CreatePerfumeReviewController> {
             ),
             SizedBox(height: 16),
             Text(
-              "Compartilhável",
+              "Gender",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: ["Feminine", "Unissex", "Masculine"]
+                  children: ["Feminine", "Unisex", "Masculine"]
                       .map(
                         (value) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Radio<String>(
                               value: value,
-                              groupValue:
-                                  controller.selectedCompartilhavel.value,
+                              groupValue: controller.selectedGenre.value,
                               onChanged: (val) {
-                                controller.selectedCompartilhavel.value = val!;
+                                controller.selectedGenre.value = val!;
                               },
                             ),
                             Text(value),
@@ -62,21 +61,21 @@ class CreatePerfumeReviewScreen extends GetView<CreatePerfumeReviewController> {
                 )),
             SizedBox(height: 16),
             Text(
-              "Estação",
+              "Ideal Season",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: ["spring", "summer", "fall", "winter"]
+                  children: ["Spring", "Summer", "Fall", "Winter"]
                       .map(
                         (value) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Radio<String>(
                               value: value,
-                              groupValue: controller.selectedEstacao.value,
+                              groupValue: controller.selectedSeason.value,
                               onChanged: (val) {
-                                controller.selectedEstacao.value = val!;
+                                controller.selectedSeason.value = val!;
                               },
                             ),
                             Text(value),
@@ -87,21 +86,71 @@ class CreatePerfumeReviewScreen extends GetView<CreatePerfumeReviewController> {
                 )),
             SizedBox(height: 16),
             Text(
-              "Ocasião",
+              "Occasion",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: ["day", "versatile", "night"]
+                  children: ["Day", "Versatile", "Night"]
                       .map(
                         (value) => Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Radio<String>(
                               value: value,
-                              groupValue: controller.selectedOcasiao.value,
+                              groupValue: controller.selectedOccasion.value,
                               onChanged: (val) {
-                                controller.selectedOcasiao.value = val!;
+                                controller.selectedOccasion.value = val!;
+                              },
+                            ),
+                            Text(value),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                )),
+            SizedBox(height: 16),
+            Text(
+              "Longevity",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Obx(() => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: ["Short", "Moderate", "Long"]
+                      .map(
+                        (value) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Radio<String>(
+                              value: value,
+                              groupValue: controller.selectedLongevity.value,
+                              onChanged: (val) {
+                                controller.selectedLongevity.value = val!;
+                              },
+                            ),
+                            Text(value),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                )),
+            SizedBox(height: 16),
+            Text(
+              "Sillage",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Obx(() => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: ["Intimate", "Moderate", "Strong"]
+                      .map(
+                        (value) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Radio<String>(
+                              value: value,
+                              groupValue: controller.selectedSillage.value,
+                              onChanged: (val) {
+                                controller.selectedSillage.value = val!;
                               },
                             ),
                             Text(value),
@@ -116,7 +165,7 @@ class CreatePerfumeReviewScreen extends GetView<CreatePerfumeReviewController> {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Obx(() => RatingBar.builder(
-                  initialRating: controller.notaGeral.value,
+                  initialRating: controller.overallRating.value,
                   minRating: 1,
                   maxRating: 5,
                   direction: Axis.horizontal,
@@ -126,9 +175,22 @@ class CreatePerfumeReviewScreen extends GetView<CreatePerfumeReviewController> {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    controller.notaGeral.value = rating;
+                    controller.overallRating.value = rating;
                   },
                 )),
+            SizedBox(height: 16),
+            Text(
+              "Comment",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: controller.commentController,
+              maxLines: 5,
+              decoration: InputDecoration(
+                labelText: "Write your comment here",
+                border: OutlineInputBorder(),
+              ),
+            ),
             SizedBox(height: 48),
             Center(
               child: ElevatedButton(
