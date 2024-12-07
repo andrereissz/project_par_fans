@@ -4,6 +4,7 @@ import 'package:project_par_fans/telas/home.dart';
 import 'package:project_par_fans/telas/login.dart';
 import 'package:project_par_fans/telas/review.dart';
 import 'package:project_par_fans/telas/singup.dart';
+import 'package:project_par_fans/telas/reviewerProfile.dart';
 import 'package:project_par_fans/telas/userProfile.dart';
 import 'package:project_par_fans/theme.dart';
 import 'firebase_options.dart';
@@ -30,6 +31,10 @@ void main() async {
         GetPage(
             name: '/user',
             page: () => Userprofile(),
+            transition: Transition.noTransition),
+        GetPage(
+            name: '/reviewer-profile',
+            page: () => ReviewerProfile(),
             transition: Transition.noTransition),
         GetPage(
             name: '/singup', page: () => Singup(), transition: Transition.fade)

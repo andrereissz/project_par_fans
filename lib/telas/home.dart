@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:project_par_fans/bottomNav.dart';
 import 'package:project_par_fans/home_controller.dart';
 import 'package:project_par_fans/model/perfumeReview.dart';
-import 'package:project_par_fans/telas/userProfile.dart';
+import 'package:project_par_fans/telas/reviewerProfile.dart';
 
 class Home extends GetView<HomeController> {
   final HomeController homeController = Get.put(HomeController());
@@ -377,7 +377,7 @@ class Home extends GetView<HomeController> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => Userprofile(), arguments: review.reviewerId);
+                  Get.to(() => ReviewerProfile(), arguments: review.reviewerId);
                 },
                 child: Text('View Profile'),
               ),

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/bottomNav.dart';
 import 'package:project_par_fans/model/perfumeReview.dart';
 import 'package:project_par_fans/user_profile_controller.dart';
 
-class Userprofile extends GetView<UserProfileController> {
+class ReviewerProfile extends GetView<UserProfileController> {
   final controller = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Bottomnav.getBarraNav(2),
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
       body: Obx(() {
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
@@ -25,7 +26,7 @@ class Userprofile extends GetView<UserProfileController> {
                 AlwaysScrollableScrollPhysics(), // Permite o gesto de refresh mesmo sem overflow
             child: Column(
               children: [
-                SizedBox(height: 100),
+                SizedBox(height: 20),
                 // Foto de perfil genérica
                 CircleAvatar(
                   radius: 50,
