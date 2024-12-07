@@ -17,7 +17,6 @@ class HomeController extends GetxController {
     fetchReviews();
   }
 
-
   Future<void> refreshReviews() async {
     isLoading.value = true;
     fetchReviews();
@@ -27,8 +26,8 @@ class HomeController extends GetxController {
   void fetchReviews() async {
     try {
       isLoading.value = true;
-      final snapshot =
-          await FirebaseFirestore.instance.collection('reviews').get();
+      final snapshot = await FirebaseFirestore.instance.collection('reviews')
+        .orderBy('reviewDate', descending: true).get();
 
       reviews.value = snapshot.docs
           .map((doc) => PerfumeReview.fromMap(doc.data()))

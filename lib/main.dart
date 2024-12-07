@@ -29,7 +29,7 @@ void main() async {
             transition: Transition.noTransition),
         GetPage(
             name: '/user',
-            page: () => UserProfile(),
+            page: () => Userprofile(),
             transition: Transition.noTransition),
         GetPage(
             name: '/singup', page: () => Singup(), transition: Transition.fade)

@@ -11,15 +11,18 @@ class Authentication {
     required String password,
   }) async {
     try {
-      await FirebaseAuth.instance
+      UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+
+      String uid = userCredential.user!.uid;
 
       CollectionReference usersRef =
           FirebaseFirestore.instance.collection('users');
+
       usersRef.add({
         'username': username,
         'email': email,
-        'id': Uuid().v4(),
+        'id': uid, // Salvando o UID do usuário
       });
       await Future.delayed(const Duration(seconds: 1));
       Get.offAllNamed('/home');

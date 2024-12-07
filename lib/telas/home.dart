@@ -377,7 +377,7 @@ class Home extends GetView<HomeController> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => UserProfile(), arguments: review.reviewerId);
+                  Get.to(() => Userprofile(), arguments: review.reviewerId);
                 },
                 child: Text('View Profile'),
               ),

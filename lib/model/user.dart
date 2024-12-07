@@ -1,33 +1,21 @@
-class User {
+class UserModel {
   String? username;
   String? email;
-  int? id;
+  String? id;
 
-  User({
-    required this.username,
-    required this.email,
-    required this.id,
-  });
+  UserModel({required this.username, required this.email, required this.id});
 
-  User.fromJson(Map<String, Object?> json)
-      : this(
-          username: json['username']! as String,
-          email: json['email']! as String,
-          id: json['id']! as int,
-        );
-
-  User copyWith({
-    String? username,
-    String? email,
-    int? id,
-  }) {
-    return User(
-        username: username ?? this.username,
-        email: email ?? this.email,
-        id: id ?? this.id);
+  // Construtor que cria uma instância de UserModel a partir de um Map
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      username: json['username'],
+      email: json['email'],
+      id: json['id'],
+    );
   }
 
-  Map<String, Object?> toJson() {
+  // Método para converter a instância de UserModel de volta para um Map
+  Map<String, dynamic> toJson() {
     return {
       'username': username,
       'email': email,

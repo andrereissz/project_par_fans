@@ -36,7 +36,7 @@ class CreatePerfumeReviewController extends GetxController {
             .get();
 
         if (userSnapshot.docs.isNotEmpty) {
-          reviewerId.value = userSnapshot.docs.first.id;
+          reviewerId.value = currentUser.uid;
           reviewerUsername.value =
               userSnapshot.docs.first['username'] ?? 'Anonymous';
         } else {
