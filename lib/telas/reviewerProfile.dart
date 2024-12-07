@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/model/perfumeReview.dart';
-import 'package:project_par_fans/user_profile_controller.dart';
+import 'package:project_par_fans/controllers/user_profile_controller.dart';
 
 class ReviewerProfile extends GetView<UserProfileController> {
   final controller = Get.put(UserProfileController());
@@ -70,25 +70,60 @@ class ReviewerProfile extends GetView<UserProfileController> {
                   ElevatedButton(
                     onPressed: () async {
                       if (controller.isFollowing.value) {
-                        // Exibe o modal para confirmar o unfollow
-                        Get.defaultDialog(
-                          title:
-                              'Would you like to unfollow ${controller.user.value?.username as String}?',
-                          content: Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  controller.unfollowUser();
-                                  Get.back();
-                                },
-                                child: Text('Yes'),
-                              ),
-                              SizedBox(width: 10),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: Text('Cancel'),
+                        Get.dialog(
+                          AlertDialog(
+                            title: Text(
+                              "Are you sure?",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            content: Text(
+                                "Do you really want to unfollow ${controller.user.value?.username}?"),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            actions: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      onPressed: () {
+                                        Get.back(); // Fecha o diálogo
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                            color:
+                                                Colors.grey), // Contorno cinza
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 14.0),
+                                      ),
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width: 10), // Espaçamento entre os botões
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        controller.unfollowUser();
+                                        Get.back(); // Executa o método de logout
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            Colors.red, // Cor do botão
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 14.0),
+                                      ),
+                                      child: Text(
+                                        "Unfollow",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -429,30 +464,65 @@ class ReviewerProfile extends GetView<UserProfileController> {
             if (controller.isOwnProfile == true)
               Column(
                 children: [
-                  SizedBox(height: 16.0),
+                  SizedBox(height: 16),
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(Colors.red)),
                       onPressed: () {
-                        Get.defaultDialog(
-                          title: 'Would you like to delete this review?',
-                          content: Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  controller.deleteReview(review);
-                                  Get.back();
-                                },
-                                child: Text('Yes'),
-                              ),
-                              SizedBox(width: 10),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: Text('Cancel'),
+                        Get.dialog(
+                          AlertDialog(
+                            title: Text(
+                              "Are you sure?",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            actions: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: OutlinedButton(
+                                      onPressed: () {
+                                        Get.back(); // Fecha o diálogo
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                            color:
+                                                Colors.grey), // Contorno cinza
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 14.0),
+                                      ),
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width: 10), // Espaçamento entre os botões
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        controller.deleteReview(review);
+                                        Get.back(); // Executa o método de logout
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            Colors.red, // Cor do botão
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 14.0),
+                                      ),
+                                      child: Text(
+                                        "Delete Review",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

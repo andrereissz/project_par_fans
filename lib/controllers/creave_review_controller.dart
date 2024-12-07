@@ -75,7 +75,7 @@ class CreatePerfumeReviewController extends GetxController {
       });
 
       _showToast("Review successfully created!", Colors.green);
-      Get.toNamed('/home');
+      Get.offAllNamed('/home');
     } catch (e) {
       _showToast("Error saving review: $e", Colors.red);
     }

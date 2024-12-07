@@ -1,20 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:project_par_fans/services/authentication.dart';
+import 'package:get/get.dart';
+import 'package:project_par_fans/controllers/sign_up_controller.dart';
 
-class Singup extends StatefulWidget {
-  const Singup({super.key});
+class Singup extends GetView<SignUpController> {
+  final controller = Get.put(SignUpController());
 
-  @override
-  @override
-  State<Singup> createState() => _SingupState();
-}
-
-class _SingupState extends State<Singup> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  var isPasswordVisible = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +34,7 @@ class _SingupState extends State<Singup> {
               SizedBox(
                 width: 300,
                 child: TextFormField(
-                  controller: usernameController,
+                  controller: controller.usernameController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.person),
                       border: OutlineInputBorder(),
@@ -55,7 +48,7 @@ class _SingupState extends State<Singup> {
               SizedBox(
                 width: 300,
                 child: TextFormField(
-                  controller: emailController,
+                  controller: controller.emailController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.mail),
                       border: OutlineInputBorder(),
@@ -67,12 +60,26 @@ class _SingupState extends State<Singup> {
               ),
               SizedBox(
                 width: 300,
-                child: TextFormField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
+                child: Obx(
+                  () => TextFormField(
+                    controller: controller.passwordController,
+                    obscureText: !isPasswordVisible.value,
+                    decoration: InputDecoration(
                       icon: Icon(Icons.key),
                       border: OutlineInputBorder(),
-                      labelText: 'Password'),
+                      labelText: 'Password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          isPasswordVisible.value
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          isPasswordVisible.value = !isPasswordVisible.value;
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -82,10 +89,10 @@ class _SingupState extends State<Singup> {
                 width: 200,
                 child: TextButton(
                     onPressed: () async {
-                      await Authentication().singUp(
-                        username: usernameController.text,
-                        email: emailController.text,
-                        password: passwordController.text,
+                      await controller.signUp(
+                        username: controller.usernameController.text,
+                        email: controller.emailController.text,
+                        password: controller.passwordController.text,
                       );
                     },
                     child: Text(

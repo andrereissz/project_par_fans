@@ -46,18 +46,6 @@ class UserProfileController extends GetxController {
     _fetchFollowingCount();
   }
 
-  void logout() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      Get.offAllNamed(
-          '/login'); // Redireciona para a tela de login após o logout
-      showToast('Logged out successfully', Colors.green);
-    } catch (e) {
-      print('Error logging out: $e');
-      showToast('Error logging out: $e', Colors.red);
-    }
-  }
-
   void _fetchUserProfile() async {
     try {
       final reviewerSnapshot = await FirebaseFirestore.instance

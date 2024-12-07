@@ -11,6 +11,8 @@ class HomeController extends GetxController {
   var hasMoreReviews = true.obs;
   final int reviewsPerPage = 4;
 
+  final String baseUrl = 'https://libretranslate.com/translate';
+
   @override
   void onInit() {
     super.onInit();
@@ -26,8 +28,10 @@ class HomeController extends GetxController {
   void fetchReviews() async {
     try {
       isLoading.value = true;
-      final snapshot = await FirebaseFirestore.instance.collection('reviews')
-        .orderBy('reviewDate', descending: true).get();
+      final snapshot = await FirebaseFirestore.instance
+          .collection('reviews')
+          .orderBy('reviewDate', descending: true)
+          .get();
 
       reviews.value = snapshot.docs
           .map((doc) => PerfumeReview.fromMap(doc.data()))
@@ -51,15 +55,15 @@ class HomeController extends GetxController {
     displayedReviews.addAll(nextReviews);
     hasMoreReviews.value = reviews.length > displayedReviews.length;
   }
+}
 
-  void showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black,
-      textColor: Colors.white,
-      fontSize: 14.0,
-    );
-  }
+void showToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    backgroundColor: Colors.black,
+    textColor: Colors.white,
+    fontSize: 14.0,
+  );
 }

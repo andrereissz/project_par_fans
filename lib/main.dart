@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_par_fans/telas/config.dart';
 import 'package:project_par_fans/telas/home.dart';
 import 'package:project_par_fans/telas/login.dart';
+import 'package:project_par_fans/telas/network.dart';
 import 'package:project_par_fans/telas/review.dart';
 import 'package:project_par_fans/telas/singup.dart';
 import 'package:project_par_fans/telas/reviewerProfile.dart';
@@ -29,12 +31,20 @@ void main() async {
             page: () => Home(),
             transition: Transition.noTransition),
         GetPage(
+            name: '/network',
+            page: () => Network(),
+            transition: Transition.noTransition),
+        GetPage(
             name: '/user',
             page: () => Userprofile(),
             transition: Transition.noTransition),
         GetPage(
             name: '/reviewer-profile',
             page: () => ReviewerProfile(),
+            transition: Transition.noTransition),
+        GetPage(
+            name: '/config',
+            page: () => ConfigView(),
             transition: Transition.noTransition),
         GetPage(
             name: '/singup', page: () => Singup(), transition: Transition.fade)

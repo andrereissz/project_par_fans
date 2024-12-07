@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/bottomNav.dart';
-import 'package:project_par_fans/home_controller.dart';
+import 'package:project_par_fans/controllers/home_controller.dart';
 import 'package:project_par_fans/model/perfumeReview.dart';
 import 'package:project_par_fans/telas/reviewerProfile.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/login_controller.dart';
-import 'package:project_par_fans/services/authentication.dart';
+import 'package:project_par_fans/controllers/login_controller.dart';
+import 'package:project_par_fans/controllers/sign_up_controller.dart';
 
 class Login extends GetView<LoginController> {
   const Login({Key? key}) : super(key: key);
@@ -12,7 +12,9 @@ class Login extends GetView<LoginController> {
 
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-    // TODO: implement build
+
+    var isPasswordVisible = false.obs;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -41,12 +43,26 @@ class Login extends GetView<LoginController> {
             ),
             SizedBox(
               width: 300,
-              child: TextFormField(
-                controller: passwordController,
-                decoration: InputDecoration(
+              child: Obx(
+                () => TextFormField(
+                  controller: passwordController,
+                  obscureText: !isPasswordVisible.value,
+                  decoration: InputDecoration(
                     icon: Icon(Icons.key),
                     border: OutlineInputBorder(),
-                    labelText: 'Password'),
+                    labelText: 'Password',
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        isPasswordVisible.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        isPasswordVisible.value = !isPasswordVisible.value;
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
             SizedBox(
@@ -56,7 +72,7 @@ class Login extends GetView<LoginController> {
               width: 200,
               child: TextButton(
                   onPressed: () async {
-                    await Authentication().singIn(
+                    await controller.singIn(
                       email: emailController.text,
                       password: passwordController.text,
                     );
