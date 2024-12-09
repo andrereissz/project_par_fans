@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/services/auth_service.dart';
 
+// ignore: must_be_immutable
 class Singup extends GetView<AuthController> {
   final controller = Get.put(AuthController());
 

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/controllers/login_controller.dart';
-import 'package:project_par_fans/services/auth_service.dart';
 
 class Login extends GetView<LoginController> {
   const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final LoginController loginController = Get.put(LoginController());
+    final LoginController controller = Get.put(LoginController());
 
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();

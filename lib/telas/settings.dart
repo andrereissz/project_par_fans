@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/bottomNav.dart';
 import 'package:project_par_fans/controllers/settings_controller.dart';

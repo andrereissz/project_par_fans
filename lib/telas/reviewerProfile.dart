@@ -445,7 +445,7 @@ class ReviewerProfile extends GetView<UserProfileController> {
               ],
             ),
             SizedBox(height: 16.0),
-            if (review.comment != null && review.comment.isEmpty == false)
+            if (review.comment.isEmpty == false)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

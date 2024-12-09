@@ -55,7 +55,7 @@ class UserProfileController extends GetxController {
           .get();
       if (reviewerSnapshot.docs.isNotEmpty) {
         final userDoc = reviewerSnapshot.docs.first;
-        user.value = UserModel.fromJson(userDoc.data()!);
+        user.value = UserModel.fromJson(userDoc.data());
       } else {
         showToast('User profile not found', Colors.red);
       }
@@ -66,7 +66,6 @@ class UserProfileController extends GetxController {
 
   void _fetchFollowerCount() async {
     try {
-      // Contar quantos usuários estão seguindo o usuário atual
       final followerQuery =
           await networkRef.where('uidFollows', isEqualTo: reviewerId).get();
 

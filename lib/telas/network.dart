@@ -11,94 +11,100 @@ class Network extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Bottomnav.getBarraNav(1),
-      body: RefreshIndicator(
-        onRefresh: () => controller.refreshReviews(),
-        child: SingleChildScrollView(
-          physics:
-              const AlwaysScrollableScrollPhysics(), // Permite o scroll mesmo sem conteúdo suficiente
-          padding: EdgeInsets.all(16.0),
-          child: Obx(() {
-            if (controller.isLoading.value && controller.reviews.isEmpty) {
-              return Center(child: CircularProgressIndicator());
-            }
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-            return Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: controller.reviews.length,
-                  itemBuilder: (context, index) {
-                    final review = controller.reviews[index];
-                    return GestureDetector(
-                      onTap: () {
-                        // Exibe o modal de detalhes do review
-                        showModalBottomSheet(
-                          context: context,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(20)),
-                          ),
-                          builder: (context) =>
-                              reviewDetailModal.getReviewDetailModal(review),
-                        );
-                      },
-                      child: Card(
-                        margin: EdgeInsets.all(8.0),
-                        elevation: 2.0,
-                        child: Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Row(
-                            children: [
-                              // Coloca o conteúdo do texto à esquerda
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${review.reviewerUsername} reviewed ${review.name}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+        if (controller.reviews.isEmpty) {
+          return Center(child: Text('No reviews available.'));
+        }
+
+        return RefreshIndicator(
+          onRefresh: () => controller.refreshReviews(),
+          child: SingleChildScrollView(
+              physics:
+                  AlwaysScrollableScrollPhysics(), // Permite o scroll mesmo sem conteúdo suficiente
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller.reviews.length,
+                    itemBuilder: (context, index) {
+                      final review = controller.reviews[index];
+                      return GestureDetector(
+                        onTap: () {
+                          // Exibe o modal de detalhes do review
+                          showModalBottomSheet(
+                            context: context,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20)),
+                            ),
+                            builder: (context) =>
+                                reviewDetailModal.getReviewDetailModal(review),
+                          );
+                        },
+                        child: Card(
+                          margin: EdgeInsets.all(8.0),
+                          elevation: 2.0,
+                          child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                // Coloca o conteúdo do texto à esquerda
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '${review.reviewerUsername} reviewed ${review.name}',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              SizedBox(
-                                width: 10,
-                              ),
-                              // Coloca as estrelas à direita
-                              Row(
-                                children: List.generate(
-                                  5,
-                                  (index) => Icon(
-                                    Icons.star,
-                                    color: index < review.overallRating
-                                        ? Colors.amber
-                                        : Colors.grey,
-                                    size: 16,
+                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
+
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                // Coloca as estrelas à direita
+                                Row(
+                                  children: List.generate(
+                                    5,
+                                    (index) => Icon(
+                                      Icons.star,
+                                      color: index < review.overallRating
+                                          ? Colors.amber
+                                          : Colors.grey,
+                                      size: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-                if (controller.hasMoreReviews.value)
-                  ElevatedButton(
-                    onPressed: () => controller.fetchReviews(),
-                    child: Text("Load More"),
+                      );
+                    },
                   ),
-              ],
-            );
-          }),
-        ),
-      ),
+                  if (controller.hasMoreReviews.value)
+                    ElevatedButton(
+                      onPressed: () => controller.fetchReviews(),
+                      child: Text("Load More"),
+                    ),
+                ],
+              )),
+        );
+      }),
     );
   }
 }
