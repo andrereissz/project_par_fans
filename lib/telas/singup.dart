@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/controllers/auth_controller.dart';
+import 'package:project_par_fans/services/auth_service.dart';
 
 class Singup extends GetView<AuthController> {
   final controller = Get.put(AuthController());
