@@ -19,8 +19,9 @@ class UserProfileController extends GetxController {
 
   final int reviewsPerPage = 4;
   final currentUser = FirebaseAuth.instance.currentUser;
+  final networkRef = FirebaseFirestore.instance.collection('network');
 
-  late String reviewerId; // Variável para o ID do usuário visitado
+  late String reviewerId;
 
   @override
   void onInit() {
@@ -59,37 +60,30 @@ class UserProfileController extends GetxController {
         showToast('User profile not found', Colors.red);
       }
     } catch (e) {
-      print('Error fetching user profile: $e');
       showToast('Error fetching user profile: $e', Colors.red);
     }
   }
 
   void _fetchFollowerCount() async {
     try {
-      final networkRef = FirebaseFirestore.instance.collection('network');
-
       // Contar quantos usuários estão seguindo o usuário atual
       final followerQuery =
           await networkRef.where('uidFollows', isEqualTo: reviewerId).get();
 
       followerCount.value = followerQuery.docs.length;
     } catch (e) {
-      print('Error fetching follower count: $e');
       showToast('Error fetching follower count: $e', Colors.red);
     }
   }
 
   void _fetchFollowingCount() async {
     try {
-      final networkRef = FirebaseFirestore.instance.collection('network');
-
       // Contar quantos usuários o usuário está seguindo
       final followingQuery =
           await networkRef.where('uidUser', isEqualTo: reviewerId).get();
 
       followingCount.value = followingQuery.docs.length;
     } catch (e) {
-      print('Error fetching following count: $e');
       showToast('Error fetching following count: $e', Colors.red);
     }
   }
@@ -110,7 +104,6 @@ class UserProfileController extends GetxController {
 
   void _checkIfFollowing() async {
     try {
-      final networkRef = FirebaseFirestore.instance.collection('network');
 
       final query = await networkRef
           .where('uidUser', isEqualTo: currentUser?.uid)
@@ -119,16 +112,12 @@ class UserProfileController extends GetxController {
 
       isFollowing.value = query.docs.isNotEmpty;
     } catch (e) {
-      print('Error checking follow status: $e');
       showToast('Error checking follow status: $e', Colors.red);
     }
   }
 
   void followUser() async {
     try {
-      final networkRef = FirebaseFirestore.instance.collection('network');
-
-      // Adiciona a relação de "seguindo"
       await networkRef.add({
         'uidUser': currentUser?.uid,
         'uidFollows': reviewerId,
@@ -136,18 +125,14 @@ class UserProfileController extends GetxController {
 
       isFollowing.value = true;
       showToast('You are now following this user', Colors.blue);
-      _fetchFollowingCount(); // Atualiza a contagem de seguidos
+      _fetchFollowingCount();
     } catch (e) {
-      print('Error following user: $e');
       showToast('Error following user: $e', Colors.red);
     }
   }
 
   void unfollowUser() async {
     try {
-      final networkRef = FirebaseFirestore.instance.collection('network');
-
-      // Remove a relação de "seguindo"
       final query = await networkRef
           .where('uidUser', isEqualTo: currentUser?.uid)
           .where('uidFollows', isEqualTo: reviewerId)
@@ -160,7 +145,6 @@ class UserProfileController extends GetxController {
         _fetchFollowingCount(); // Atualiza a contagem de seguidos
       }
     } catch (e) {
-      print('Error unfollowing user: $e');
       showToast('Error unfollowing user: $e', Colors.red);
     }
   }
@@ -181,7 +165,6 @@ class UserProfileController extends GetxController {
       displayedReviews.value = reviews.take(reviewsPerPage).toList();
       hasMoreReviews.value = reviews.length > displayedReviews.length;
     } catch (e) {
-      print('Error fetching reviews: $e');
       showToast('Error fetching reviews: $e', Colors.red);
     } finally {
       isLoading.value = false;
@@ -194,7 +177,6 @@ class UserProfileController extends GetxController {
           reviews.skip(displayedReviews.length).take(reviewsPerPage).toList();
       displayedReviews.addAll(nextReviews);
     } catch (e) {
-      print('Error loading more reviews: $e');
       showToast('Error loading more reviews: $e', Colors.red);
     }
   }
@@ -215,7 +197,6 @@ class UserProfileController extends GetxController {
         showToast('Review deleted', Colors.green);
       }
     } catch (e) {
-      print('Error deleting the review: $e');
       showToast('Error deleting the review: $e', Colors.red);
     }
   }
