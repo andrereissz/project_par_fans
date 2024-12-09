@@ -126,6 +126,7 @@ class UserProfileController extends GetxController {
       isFollowing.value = true;
       showToast('You are now following this user', Colors.blue);
       _fetchFollowingCount();
+      refreshUserProfile();
     } catch (e) {
       showToast('Error following user: $e', Colors.red);
     }
@@ -142,7 +143,8 @@ class UserProfileController extends GetxController {
         await query.docs.first.reference.delete();
         isFollowing.value = false;
         showToast('You have unfollowed this user', Colors.blue);
-        _fetchFollowingCount(); // Atualiza a contagem de seguidos
+        _fetchFollowingCount();
+        refreshUserProfile();
       }
     } catch (e) {
       showToast('Error unfollowing user: $e', Colors.red);
