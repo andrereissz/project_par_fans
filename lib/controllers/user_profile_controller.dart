@@ -104,7 +104,6 @@ class UserProfileController extends GetxController {
 
   void _checkIfFollowing() async {
     try {
-
       final query = await networkRef
           .where('uidUser', isEqualTo: currentUser?.uid)
           .where('uidFollows', isEqualTo: reviewerId)
@@ -163,6 +162,8 @@ class UserProfileController extends GetxController {
           .map((doc) => PerfumeReview.fromMap(doc.data()))
           .toList();
 
+      reviews.sort((b, a) => a.reviewDate.compareTo(b.reviewDate));
+
       // Exibe os primeiros reviews
       displayedReviews.value = reviews.take(reviewsPerPage).toList();
       hasMoreReviews.value = reviews.length > displayedReviews.length;
@@ -197,6 +198,7 @@ class UserProfileController extends GetxController {
       if (query.docs.isNotEmpty) {
         await query.docs.first.reference.delete();
         showToast('Review deleted', Colors.green);
+        refreshUserProfile();
       }
     } catch (e) {
       showToast('Error deleting the review: $e', Colors.red);

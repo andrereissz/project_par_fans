@@ -23,7 +23,7 @@ class Bottomnav {
                 arguments: FirebaseAuth.instance.currentUser?.uid);
             break;
           case (3):
-            Get.offAndToNamed('/config');
+            Get.offAndToNamed('/settings');
             break;
         }
       },

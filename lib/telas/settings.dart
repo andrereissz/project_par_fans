@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/bottomNav.dart';
-import 'package:project_par_fans/controllers/config_controller.dart';
+import 'package:project_par_fans/controllers/auth_controller.dart';
 
-class ConfigView extends GetView<ConfigController> {
-  final controller = Get.put(ConfigController());
+class SettingsView extends GetView<AuthController> {
+  final controller = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ConfigView extends GetView<ConfigController> {
             Expanded(
               child: Center(
                 child: Text(
-                  "Configurações",
+                  "Account Settings",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -25,12 +25,12 @@ class ConfigView extends GetView<ConfigController> {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red, // Cor vermelha
+                  backgroundColor: Colors.red,
                   padding:
-                      EdgeInsets.symmetric(vertical: 16.0), // Altura do botão
+                      EdgeInsets.symmetric(vertical: 16.0),
                   shape: RoundedRectangleBorder(
                     borderRadius:
-                        BorderRadius.circular(8), // Bordas arredondadas
+                        BorderRadius.circular(8),
                   ),
                 ),
                 onPressed: () {
@@ -66,10 +66,10 @@ class ConfigView extends GetView<ConfigController> {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    Get.back(); // Fecha o diálogo
+                    Get.back();
                   },
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.grey), // Contorno cinza
+                    side: BorderSide(color: Colors.grey),
                     padding: EdgeInsets.symmetric(vertical: 14.0),
                   ),
                   child: Text(
@@ -78,15 +78,15 @@ class ConfigView extends GetView<ConfigController> {
                   ),
                 ),
               ),
-              SizedBox(width: 10), // Espaçamento entre os botões
+              SizedBox(width: 10),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () async {
-                    Get.back(); // Fecha o diálogo
-                    await controller.signOut(); // Executa o método de logout
+                    Get.back();
+                    await controller.signOut();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red, // Cor do botão
+                    backgroundColor: Colors.red,
                     padding: EdgeInsets.symmetric(vertical: 14.0),
                   ),
                   child: Text(

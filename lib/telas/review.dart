@@ -225,7 +225,7 @@ class CreatePerfumeReviewScreen extends GetView<CreatePerfumeReviewController> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 48),
+              SizedBox(height: 16),
               Center(
                 child: ElevatedButton(
                   onPressed: controller.saveReview,

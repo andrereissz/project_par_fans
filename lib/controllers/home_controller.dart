@@ -37,12 +37,11 @@ class HomeController extends GetxController {
           .map((doc) => PerfumeReview.fromMap(doc.data()))
           .toList();
 
-      // Carrega inicialmente os primeiros 4 reviews
       displayedReviews.value = reviews.take(reviewsPerPage).toList();
       hasMoreReviews.value = reviews.length > displayedReviews.length;
     } catch (e) {
       print('Error fetching reviews: $e');
-      showToast("Failed to load reviews: $e");
+      _showToast("Failed to load reviews: $e");
     } finally {
       isLoading.value = false;
     }
@@ -57,7 +56,7 @@ class HomeController extends GetxController {
   }
 }
 
-void showToast(String message) {
+void _showToast(String message) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/telas/config.dart';
+import 'package:project_par_fans/telas/settings.dart';
 import 'package:project_par_fans/telas/home.dart';
 import 'package:project_par_fans/telas/login.dart';
 import 'package:project_par_fans/telas/network.dart';
@@ -43,8 +43,8 @@ void main() async {
             page: () => ReviewerProfile(),
             transition: Transition.noTransition),
         GetPage(
-            name: '/config',
-            page: () => ConfigView(),
+            name: '/settings',
+            page: () => SettingsView(),
             transition: Transition.noTransition),
         GetPage(
             name: '/singup', page: () => Singup(), transition: Transition.fade)

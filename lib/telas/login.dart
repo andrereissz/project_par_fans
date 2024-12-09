@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_par_fans/controllers/login_controller.dart';
-import 'package:project_par_fans/controllers/sign_up_controller.dart';
+import 'package:project_par_fans/controllers/auth_controller.dart';
 
 class Login extends GetView<LoginController> {
   const Login({Key? key}) : super(key: key);
@@ -71,15 +71,21 @@ class Login extends GetView<LoginController> {
             SizedBox(
               width: 200,
               child: TextButton(
-                  onPressed: () async {
-                    await controller.singIn(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    );
-                  },
-                  child: Text(
-                    "Login",
-                  )),
+                onPressed: () async {
+                  await controller.singIn(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
+                child: Text(
+                  "Login",
+                  style: TextStyle(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                ),
+              ),
             ),
             SizedBox(
               width: 200,

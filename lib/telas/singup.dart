@@ -2,12 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:project_par_fans/controllers/sign_up_controller.dart';
+import 'package:project_par_fans/controllers/auth_controller.dart';
 
-class Singup extends GetView<SignUpController> {
-  final controller = Get.put(SignUpController());
+class Singup extends GetView<AuthController> {
+  final controller = Get.put(AuthController());
 
   var isPasswordVisible = false.obs;
+
+  Singup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +99,12 @@ class Singup extends GetView<SignUpController> {
                     },
                     child: Text(
                       "Register",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                     )),
               ),
             ],
